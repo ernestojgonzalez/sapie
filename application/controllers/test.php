@@ -34,7 +34,7 @@
 					"birth" => $birth,
 				);
 				$this->db->insert("test", $datos);
-				$this->load->view("success");	
+				$this->load->view("success", $datos);	
 			}
 		}
 	}

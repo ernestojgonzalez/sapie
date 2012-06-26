@@ -2679,11 +2679,11 @@ class grocery_CRUD extends grocery_CRUD_States
 	protected $callback_before_upload	= null;
 	protected $callback_after_upload	= null;
 	
-	protected $default_javascript_path				= 'assets/grocery_crud/js';
-	protected $default_css_path						= 'assets/grocery_crud/css';
-	protected $default_texteditor_path 				= 'assets/grocery_crud/texteditor';
-	protected $default_theme_path					= 'assets/grocery_crud/themes';
-	protected $default_language_path				= 'assets/grocery_crud/languages';
+	protected $default_javascript_path				= 'application/external/grocery_crud/js';
+	protected $default_css_path						= 'application/external/grocery_crud/css';
+	protected $default_texteditor_path 				= 'application/external/grocery_crud/texteditor';
+	protected $default_theme_path					= 'application/external/grocery_crud/themes';
+	protected $default_language_path				= 'application/external/grocery_crud/languages';
 	
 	/**
 	 * 
