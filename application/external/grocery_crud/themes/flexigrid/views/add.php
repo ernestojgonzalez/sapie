@@ -28,6 +28,11 @@
 		</div>
 	</div>
 <div id='main-table-box'>
+	<?php		
+		$insert_url = explode("/", $insert_url);		
+		unset($insert_url[0], $insert_url[1]); //destruyo el elemento en la posicion 0 y 1 (primer segmento de la url, que es la cadena sapie)
+		$insert_url = implode("/", $insert_url);				
+	?>
 	<?php echo form_open( $insert_url, 'method="post" id="crudForm" autocomplete="off" enctype="multipart/form-data"'); ?>
 		<div class='form-div'>
 			<?php

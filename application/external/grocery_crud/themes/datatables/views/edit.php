@@ -27,7 +27,12 @@
 		<div class='clear'></div>
 	</h3>
 <div class='form-content form-div'>
-	<?php echo form_open( $update_url, 'method="post" id="crudForm" autocomplete="off" enctype="multipart/form-data"'); ?>
+	<?php		
+		$update_url = explode("/", $update_url);		
+		unset($update_url[0], $update_url[1]); //destruyo el elemento en la posicion 0 y 1 (primer segmento de la url, que es la cadena sapie)
+		$update_url = implode("/", $update_url);				
+	?>
+	<?php echo form_open( $update_url, 'method="post" id="crudForm" autocomplete="off" enctype="multipart/form-data"'); ?>		
 		<div>
 		<?php
 			$counter = 0; 

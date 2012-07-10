@@ -2293,7 +2293,6 @@ class grocery_CRUD_States extends grocery_CRUD_Layout
     }
 		
 		$state_url = implode('/',$state_url_array).'/'.$url;
-		
 		return site_url($state_url);
 	}
 	
