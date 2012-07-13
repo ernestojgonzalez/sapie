@@ -15,17 +15,20 @@ class Test_grocery extends CI_Controller{
 		$this->grocery_crud->add_fields('eje','municipio','parroquia','fecha','observacion');
 		$this->grocery_crud->edit_fields('fecha','observacion');
 		$this->grocery_crud->display_as('eje','Eje de la Plenaria');
-		$this->grocery_crud->display_as('municipio','Municipio de la Plenaria');
-		$this->grocery_crud->display_as('parroquia','Parroquia de la Plenaria');
+		$this->grocery_crud->display_as('municipio','Municipio');
+		$this->grocery_crud->display_as('parroquia','Parroquia');
 		$this->grocery_crud->display_as('fecha','Fecha de la Plenaria');
-		$this->grocery_crud->display_as('observacion','Observaciones realizadas en la Plenaria');
+		$this->grocery_crud->display_as('observacion','Observaciones');
+		$this->grocery_crud->set_relation('eje','eje','nombre_eje');
+		$this->grocery_crud->set_relation('municipio','municipio','nombre_municipio');
+		$this->grocery_crud->set_relation('parroquia','parroquia','nombre_parroquia');
 		$this->grocery_crud->required_fields('eje','municipio','parroquia','fecha','observacion');
 		$this->grocery_crud->add_action('Propuestas', base_url().'application/assets/images/txt.png', 'test_grocery/propuestas');
 		$this->grocery_crud->add_action('Participantes', base_url().'application/assets/images/person.png', 'test_grocery/plenarias_participantes');
 		$output = $this->grocery_crud->render();
 		$this->invocaVista($output);
 	}
-	
+	 
 	function propuestas(){
 		$this->grocery_crud->set_theme("datatables");		
 		$this->grocery_crud->set_subject("propuestas");		
@@ -46,6 +49,10 @@ class Test_grocery extends CI_Controller{
 		$this->grocery_crud->display_as('representante_email','Correo del Representante');
 		$this->grocery_crud->display_as('colectivo','Colectivo Presente');
 		$this->grocery_crud->display_as('descripcion','Descripcion de la Propuesta');
+		$this->grocery_crud->set_relation('area_inversion','area_inversion','nombre_area');
+		$this->grocery_crud->set_relation('municipio','municipio','nombre_municipio');
+		$this->grocery_crud->set_relation('parroquia','parroquia','nombre_parroquia');
+		$this->grocery_crud->set_relation('plenaria','eje','nombre_eje');
 		$this->grocery_crud->required_fields('nombre','area_inversion','plenaria','municipio','parroquia', 'razon');
 		$this->grocery_crud->add_action('Participantes', base_url().'application/assets/images/person.png', 'test_grocery/plenarias_participantes');
 		$this->grocery_crud->callback_field('representante_tlf',array($this,'field_callback_1'));
@@ -56,7 +63,7 @@ class Test_grocery extends CI_Controller{
 	
 	function field_callback_1($value = '', $primary_key = null)
 {
-    return '+58 <input type="text" maxlength="50" value="'.$value.'" name="phone" style="width:462px">';
+    return '+58 <input type="text" maxlength="50" value="'.$value.'" name="representante_tlf" style="width:462px">';
 } 
 	
 	function plenarias_participantes(){	
@@ -70,6 +77,8 @@ class Test_grocery extends CI_Controller{
 		$this->grocery_crud->display_as('tlf','Telefono');
 		$this->grocery_crud->display_as('email','Correo');
 		$this->grocery_crud->display_as('plenaria','Plenaria participante');
+		$this->grocery_crud->set_relation('plenaria','plenarias','{eje} {fecha}');
+		//$this->grocery_crud->set_relation_n_n('plenaria','eje','plenarias','nombre_eje','fecha');
 		$this->grocery_crud->required_fields('nombre','tlf','plenaria');
 		$output = $this->grocery_crud->render();
 		$this->invocaVista($output);
