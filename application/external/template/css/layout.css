@@ -1,61 +1,62 @@
 /* Algunas de las clases CSS disponibles */
-/* site_title: Para el titulo del sistema */
-/* section_title: Para el encabezado de la institución */
-/* btn_view_site: Para el enlace de la página de la UCG */
+/* site_title: Para el titulo del sistema (Texto a la izquierda de la cabecera) */
+/* section_title: Para el encabezado de la aplicación (Texto de la cabecera en la columna 2, aquí va el encabezado institucional) */
+/* btn_view_site: Botón para el enlace de la página de la UCG */
 /* user: Para la barra donde se muestra info acerca del usuario logeado. */
 /* logout_user: Para el enlace de cerrar sesión */
 /* breadcrumbs_container: Para la div contenedora del breadcrumbs */
-/* breadcrumbs: para el Breadcrums (Barra que le indica al usuario en que parte de la aplicación se encuentra ubicado.) */
+/* breadcrumbs: para el Breadcrums (Barra que muestra la ruta indicandole al usuario en que parte de la aplicación se encuentra ubicado.) */
 /* breadcrumb_divider: para la linea que divide una sección de otra en el breadcrumbs */
 /* current: Para la sección en la que está ubicado actualmente el usuario */
 /* column: Para las columnas, se usa en la columna lateral izquierda (#sidebar) y para la columna principal o derecha (#main) */
 /* quick_search: Para el form de busqueda. */
 /* toggle: Para las listas que contienen los items de las opciones padres del menú de opciones. */
-/* ***********Todos las clases relacionadas a los iconos empiezan por icn_ *************** */
-/* icn_new_article: Agregar nuevo articulo, documento... */
-/* icn_edit_article: Editar articulo, documento. */
-/* icn_categories:  */
-/* icn_tags: */
-/* icn_add_user: */
-/* icn_view_users: */
-/* icn_profile: */
-/* icn_folder: */
-/* icn_photo: */
-/* icn_audio: */
-/* icn_video: */
-/* icn_settings: */
-/* icn_security: */
-/* icn_jump_back: */
-/* ***********************************Iconos******************************************* */
-/* alert_info: */
-/* alert_warning: */
-/* alert_error: */
-/* alert_success: */
-/* module width_full: */
-/* module_content: */
-/* stats_graph: */
-/* stats_overview: */
-/* overview_today: */
-/* overview_day: */
-/* overview_count: */
-/* overview_type: */
-/* overview_previous: */
-/* clear: */
-/* module width_3_quarter: */
-/* tabs_involved: */
-/* tabs: */
-/* tab_container: */
-/* tab_content: */
-/* tablesorter: */
-/* module width_quarter: */
-/* message_list: */
-/* module_content: */
-/* message: */
-/* post_message: */
-/* btn_post_message: */
-/* submit_link: */
-/* alt_btn: */
-/* spacer: */
+/* ***********Todos las clases relacionadas a los iconos tienen el prefijo icn_ *************** */
+/* icn_new_article: Icono agregar nuevo registro... */
+/* icn_edit_article: Icono editar registro. */
+/* icn_categories: Icono Categorias */
+/* icn_tags: Icono tags o etiquetas*/
+/* icn_add_user: Icono agregar nuevo usuario*/
+/* icn_view_users: Icono ver usuarios*/
+/* icn_profile: Icono Perfil del usuario*/
+/* icn_folder: Icono carpeta o directorio */
+/* icn_photo: Icono galeria de fotos, imagenes, etc... */
+/* icn_audio: Icono audio */
+/* icn_video: Icono video */
+/* icn_settings: Icono opciones o configuración*/
+/* icn_security: Icono candado (seguridad, password, etc..)*/
+/* icn_jump_back: Icono logout*/
+/* ***********************************Fin Iconos******************************************* */
+/* alert_info: Para mostrar mensajes informativos al usuario */
+/* alert_warning: Para mostrar mensajes de advertencia */
+/* alert_error: Para mostrar mensajes de error*/
+/* alert_success: Para mostrar mensajes de que ha realizado bien algún proceso*/
+/* module: para los modulos o secciones de contenido */
+/* module width_full: para que el modulo ocupe el 95% (casi todo) de ancho de su contenedor */
+/* module_content: para el div (contenedor) del contenido de los modulos o secciones*/
+/* stats_graph: Para los contenedores de graficos estadisticos */
+/* stats_overview: Para los contenedores  de los datos de los graficos estadisticos */
+/* overview_today: Para datos estadisticos del dia */
+/* overview_day: Para datos estadisticos del dia */
+/* overview_count: Para datos estadisticos del dia */
+/* overview_type: Para datos estadisticos del dia */
+/* overview_previous: Para datos estadisticos de dias previos */
+/* clear: Para no permitir elementos flotantes a la izquierda o a la derecha */
+/* module width_3_quarter: Para que el modulo o sección abarque el 66% (tres cuartos del ancho disponible) del ancho del contenedor*/
+/* tabs_involved: Para encabezados de modulos que tienen tabs incrustadas */
+/* tabs: para las tabs*/
+/* tab_container: para el contenedor de contenido de las tabs*/
+/* tab_content: para cada uno de los contenedores de contenido de las tabs*/
+/* tablesorter: Para las tablas */
+/* module width_quarter: Para que el modulo o sección ocupe el 26% (una cuarta parte del ancho disponible) del ancho del contenedor */
+/* message_list: Para el contenedor de los mensajes  */
+/* message: Para los mensajes */
+/* post_message: Para el form de envío de mensajes */
+/* btn_post_message: botón para enviar mensaje */
+/* submit_link: Para el contenedor de los botones de publicación de articulos */
+/* alt_btn: para el botón de publicar articulo */
+/* spacer: Para separar un módulo o sección de otro, el espacio es de 20px */
+
 /* Essentials */
 
 html, div, map, dt, isindex, form, header, aside, section, section, article, footer {  
