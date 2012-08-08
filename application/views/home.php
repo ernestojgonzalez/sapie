@@ -5,14 +5,32 @@
     <meta charset="utf-8"/>
     <title>SAPIE</title>
     <link rel="stylesheet" href="application/external/template/css/layout.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="application/external/kendoui/source/styles/kendo.blueopal.css" type="text/css" media="screen" />
+
+    <!-- Estilo para el grid kendoui -->
+    <style type="text/css">
+      #clientsDb {
+      width: 692px;
+      height: 413px;
+      margin: 30px auto;
+      padding: 51px 4px 0 4px;
+      background: url('application/external/kendoui/examples/content/web/grid/clientsDb.png') no-repeat 0 0;
+      }
+
+    </style>
+
     <!--[if lt IE 9]>
 	<link rel="stylesheet" href="css/ie.css" type="text/css" media="screen" />
 	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
 	<![endif]-->
-    <script src="application/external/template/js/jquery-1.5.2.min.js"       type="text/javascript"></script>
+    <!-- <script src="application/external/template/js/jquery-1.5.2.min.js"       type="text/javascript"></script> -->
+    <script src="application/external/kendoui/js/jquery.min.js"               type="text/javascript"></script>
+
     <script src="application/external/template/js/hideshow.js"               type="text/javascript"></script>
     <script src="application/external/template/js/jquery.tablesorter.min.js" type="text/javascript"></script>
     <script src="application/external/template/js/jquery.equalHeight.js"     type="text/javascript"></script>
+    <script src="application/external/kendoui/js/kendo.web.min.js"     type="text/javascript"></script>
+    <script src="application/external/kendoui/examples/content/shared/js/people.js"></script>
     <script type="text/javascript">
     $(function(){
       // Cuando todos los elementos de la página cargen..
@@ -76,32 +94,39 @@
       <!-- Fin de Form de busqueda -->
       
       <!-- Menú de Opciones -->
-      <h3>Content</h3>
+      <h3>Participación Popular</h3>
       <ul class="toggle">
-	<li class="icn_new_article"><a href="#">New Article</a></li>
-	<li class="icn_edit_article"><a href="#">Edit Articles</a></li>
-	<li class="icn_categories"><a href="#">Categories</a></li>
-	<li class="icn_tags"><a href="#">Tags</a></li>
+	<li class="icn_new_article"><a href="#">Plenarias</a></li>
+	<li class="icn_edit_article"><a href="#">Propuestas</a></li>
+	<li class="icn_categories"><a href="#">Participantes</a></li>
       </ul>
-      <h3>Users</h3>
-      <ul class="toggle">
-	<li class="icn_add_user"><a href="#">Add New User</a></li>
-	<li class="icn_view_users"><a href="#">View Users</a></li>
-	<li class="icn_profile"><a href="#">Your Profile</a></li>
-      </ul>
-      <h3>Media</h3>
-      <ul class="toggle">
-	<li class="icn_folder"><a href="#">File Manager</a></li>
-	<li class="icn_photo"><a href="#">Gallery</a></li>
-	<li class="icn_audio"><a href="#">Audio</a></li>
-	<li class="icn_video"><a href="#">Video</a></li>
-      </ul>
-      <h3>Admin</h3>
-      <ul class="toggle">
-	<li class="icn_settings"><a href="#">Options</a></li>
-	<li class="icn_security"><a href="#">Security</a></li>
-	<li class="icn_jump_back"><a href="#">Logout</a></li>
-      </ul>
+
+      <!-- <h3>Content</h3> -->
+      <!-- <ul class="toggle"> -->
+      <!-- 	<li class="icn_new_article"><a href="#">New Article</a></li> -->
+      <!-- 	<li class="icn_edit_article"><a href="#">Edit Articles</a></li> -->
+      <!-- 	<li class="icn_categories"><a href="#">Categories</a></li> -->
+      <!-- 	<li class="icn_tags"><a href="#">Tags</a></li> -->
+      <!-- </ul> -->
+      <!-- <h3>Users</h3> -->
+      <!-- <ul class="toggle"> -->
+      <!-- 	<li class="icn_add_user"><a href="#">Add New User</a></li> -->
+      <!-- 	<li class="icn_view_users"><a href="#">View Users</a></li> -->
+      <!-- 	<li class="icn_profile"><a href="#">Your Profile</a></li> -->
+      <!-- </ul> -->
+      <!-- <h3>Media</h3> -->
+      <!-- <ul class="toggle"> -->
+      <!-- 	<li class="icn_folder"><a href="#">File Manager</a></li> -->
+      <!-- 	<li class="icn_photo"><a href="#">Gallery</a></li> -->
+      <!-- 	<li class="icn_audio"><a href="#">Audio</a></li> -->
+      <!-- 	<li class="icn_video"><a href="#">Video</a></li> -->
+      <!-- </ul> -->
+      <!-- <h3>Admin</h3> -->
+      <!-- <ul class="toggle"> -->
+      <!-- 	<li class="icn_settings"><a href="#">Options</a></li> -->
+      <!-- 	<li class="icn_security"><a href="#">Security</a></li> -->
+      <!-- 	<li class="icn_jump_back"><a href="#">Logout</a></li> -->
+      <!-- </ul> -->
       <!-- Fin de Menú de opciones -->
 
       <!-- Pie de página -->
@@ -152,17 +177,52 @@
       <article class="module width_full">
 	<header><h3>Plenarias</h3></header>
 	<div class="module_content">
+	  <!-- Grid de Plenarias -->
+	  <div id="clientsDb">
+            <div id="grid" style="height: 380px"></div>
+          </div>
+	  <!-- FIN Grid de Plenarias -->
         </div>
       </article>
-      <article class="module width_full">
-	<header><h3>Propuestas</h3></header>
-	<div class="module_content">
-        </div>
-      </article>
+
       <div class="spacer"></div>
     </section>
 
-
+    <script type="text/javascript">
+      $(document).ready(function() {
+      $("#grid").kendoGrid({
+      dataSource: {
+      data: createRandomData(50),
+      pageSize: 10
+      },
+      groupable: true,
+      sortable: true,
+      pageable: true,
+      columns: [ {
+      field: "FirstName",
+      width: 90,
+      title: "First Name"
+      } , {
+      field: "LastName",
+      width: 90,
+      title: "Last Name"
+      } , {
+      width: 100,
+      field: "City"
+      } , {
+      field: "Title"
+      } , {
+      field: "BirthDate",
+      title: "Birth Date",
+      template: '#= kendo.toString(BirthDate,"dd MMMM yyyy") #'
+      } , {
+      width: 50,
+      field: "Age"
+      }
+      ]
+      });
+      });
+    </script>
   </body>
 
 </html>
