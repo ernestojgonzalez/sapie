@@ -19,60 +19,45 @@ $(document).ready(function() {
     $('.column').equalHeight();
 
     //Grid de Plenarias
-    // $("#grid").kendoGrid({
-    //     dataSource: {
-    //         data: createRandomData(50),
-    //         pageSize: 10
-    //     },
-    //     groupable: true,
-    //     sortable: true,
-    //     pageable: true,
-    //     columns: [ 
-    //         { field: "FirstName", width: 90, title: "First Name" }, 
-    //         { field: "LastName", width: 90, title: "Last Name" },
-    //         { field: "City", width: 100 }, 
-    //         { field: "Title" }, 
-    //         { field: "BirthDate", title: "Birth Date", template: '#= kendo.toString(BirthDate,"dd MMMM yyyy") #' }, 
-    //         { field: "Age", width: 50 },
-    //         { field: "actions", title: "Opciones", width: 100, command: ["save", "destroy", "cancel", "create"] }
-    //     ]
-    // });
-    var crudSapiePlenariasBaseUrl = "http://demos.kendoui.com/service",
+    var crudPlenariasBaseUrl = "plenarias/";
     dataSource = new kendo.data.DataSource({
         transport: {
             read:  {
-                url: crudServiceBaseUrl + "/Products",
-                dataType: "jsonp"
+                url: crudPlenariasBaseUrl + "getDataForGrid",
+                dataType: "json"
             },
             update: {
-                url: crudServiceBaseUrl + "/Products/Update",
-                dataType: "jsonp"
+                url: crudPlenariasBaseUrl + "crud/edit",
+                dataType: "json"
             },
             destroy: {
-                url: crudServiceBaseUrl + "/Products/Destroy",
-                dataType: "jsonp"
+                url: crudPlenariasBaseUrl + "crud/destroy",
+                dataType: "json"
             },
             create: {
-                url: crudServiceBaseUrl + "/Products/Create",
-                dataType: "jsonp"
+                url: crudPlenariasBaseUrl + "crud/create",
+                dataType: "json"
             },
             parameterMap: function(options, operation) {
                 if (operation !== "read" && options.models) {
                     return {models: kendo.stringify(options.models)};
                 }
+                //alert(kendo.stringify(options.models));
             }
         },
         batch: true,
-        pageSize: 30,
+        pageSize: 10,
         schema: {
             model: {
-                id: "ProductID",
+                id: "id",
                 fields: {
-                    ProductID: { editable: false, nullable: true },
-                    ProductName: { validation: { required: true } },
-                    UnitPrice: { type: "number", validation: { required: true, min: 1} },
-                    Discontinued: { type: "boolean" },
-                    UnitsInStock: { type: "number", validation: { min: 0, required: true } }
+                    id: { editable: false, nullable: true },
+                    eje: { validation: { required: true } },
+                    municipio: { validation: { required: true } },
+                    parroquia: { validation: { required: true } },
+                    lugar: { validation: { required: true } },
+                    fecha: { validation: { required: true } },
+                    observacion: {}
                 }
             }
         }
@@ -81,16 +66,18 @@ $(document).ready(function() {
     $("#grid").kendoGrid({
         dataSource: dataSource,
         pageable: true,
-        groupable: true,
+
         height: 400,
-        toolbar: ["create"],
+        toolbar: [
+            { name: "create", text: "Agregar nueva plenaria" }
+        ],
         columns: [
             { field: "eje", title: "Eje", width: "100px" },
             { field: "municipio", title:"Municipio", width: "100px" },
             { field: "parroquia", width: "100px" },
             { field: "lugar", title: "Lugar", width: "100px"},
             { field: "fecha", title: "Fecha", width: "100px"},
-            { field: "observaciones", title: "Observaciones", width: "100px"},
+            { field: "observacion", title: "Observaciones", width: "100px"},
             { title: "Opciones", command: ["edit", "destroy"], title: "&nbsp;", width: "210px" }
         ],
         editable: "inline"
