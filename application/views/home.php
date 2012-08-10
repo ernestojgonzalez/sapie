@@ -5,53 +5,13 @@
     <meta charset="utf-8"/>
     <title>SAPIE</title>
     <link rel="stylesheet" href="application/external/template/css/layout.css" type="text/css" media="screen" />
-    <link rel="stylesheet" href="application/external/kendoui/source/styles/kendo.blueopal.css" type="text/css" media="screen" />
-
-    <!-- Estilo para el grid kendoui -->
-    <style type="text/css">
-      #clientsDb {
-      width: 692px;
-      height: 413px;
-      margin: 30px auto;
-      padding: 51px 4px 0 4px;
-      background: url('application/external/kendoui/examples/content/web/grid/clientsDb.png') no-repeat 0 0;
-      }
-
-    </style>
-
+    <link rel="stylesheet" href="application/external/kendoui/source/styles/kendo.common.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="application/views/scripts/css/kendo.sapie.css" type="text/css" media="screen" />
     <!--[if lt IE 9]>
 	<link rel="stylesheet" href="css/ie.css" type="text/css" media="screen" />
 	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
 	<![endif]-->
-    <!-- <script src="application/external/template/js/jquery-1.5.2.min.js"       type="text/javascript"></script> -->
-    <script src="application/external/kendoui/js/jquery.min.js"               type="text/javascript"></script>
 
-    <script src="application/external/template/js/hideshow.js"               type="text/javascript"></script>
-    <script src="application/external/template/js/jquery.tablesorter.min.js" type="text/javascript"></script>
-    <script src="application/external/template/js/jquery.equalHeight.js"     type="text/javascript"></script>
-    <script src="application/external/kendoui/js/kendo.web.min.js"     type="text/javascript"></script>
-    <script src="application/external/kendoui/examples/content/shared/js/people.js"></script>
-    <script type="text/javascript">
-    $(function(){
-      // Cuando todos los elementos de la página cargen..
-        $(".tablesorter").tablesorter(); 
-        $(".tab_content").hide(); //Oculto todos los elementos
-        $("ul.tabs li:first").addClass("active").show(); //Activo la primera pestaña
-        $(".tab_content:first").show(); //Muestro el contenido de la primera pestaña
-
-        //En evento click
-        $("ul.tabs li").click(function() {
-            $("ul.tabs li").removeClass("active"); //Remuevo cualquier clase "active"
-            $(this).addClass("active"); //Agrego clase "active" a la pestaña seleccionada
-            $(".tab_content").hide(); //Oculto todo el contenido de la pestaña
-            var activeTab = $(this).find("a").attr("href"); //Busco el valor del atributo href para identificar la pestaña activa + el contenido
-            $(activeTab).fadeIn(); //Aplico el efecto fadeIn en el contenido del ID activo
-            return false;
-        });
-      
-        $('.column').equalHeight();
-    });
-    </script>
   </head>
 
 
@@ -178,9 +138,7 @@
 	<header><h3>Plenarias</h3></header>
 	<div class="module_content">
 	  <!-- Grid de Plenarias -->
-	  <div id="clientsDb">
-            <div id="grid" style="height: 380px"></div>
-          </div>
+          <div id="grid" style="height: 380px" class="sapie-grid"></div>
 	  <!-- FIN Grid de Plenarias -->
         </div>
       </article>
@@ -188,41 +146,16 @@
       <div class="spacer"></div>
     </section>
 
-    <script type="text/javascript">
-      $(document).ready(function() {
-      $("#grid").kendoGrid({
-      dataSource: {
-      data: createRandomData(50),
-      pageSize: 10
-      },
-      groupable: true,
-      sortable: true,
-      pageable: true,
-      columns: [ {
-      field: "FirstName",
-      width: 90,
-      title: "First Name"
-      } , {
-      field: "LastName",
-      width: 90,
-      title: "Last Name"
-      } , {
-      width: 100,
-      field: "City"
-      } , {
-      field: "Title"
-      } , {
-      field: "BirthDate",
-      title: "Birth Date",
-      template: '#= kendo.toString(BirthDate,"dd MMMM yyyy") #'
-      } , {
-      width: 50,
-      field: "Age"
-      }
-      ]
-      });
-      });
-    </script>
+    <!-- Carga de scripts al final para mejorar la carga del sitio -->
+    <script src="application/external/kendoui/js/jquery.min.js"               type="text/javascript"></script>
+    <script src="application/external/template/js/hideshow.js"               type="text/javascript"></script>
+    <script src="application/external/template/js/jquery.tablesorter.min.js" type="text/javascript"></script>
+    <script src="application/external/template/js/jquery.equalHeight.js"     type="text/javascript"></script>
+    <script src="application/external/kendoui/js/kendo.web.min.js"     type="text/javascript"></script>
+    <script src="application/external/kendoui/examples/content/shared/js/people.js"></script>
+    <script src="application/views/scripts/js/home.js"></script>
+    <!-- FIN Carga de scripts al final para mejorar la carga del sitio -->
+
   </body>
 
 </html>
