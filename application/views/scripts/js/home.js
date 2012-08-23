@@ -63,6 +63,47 @@ $(document).ready(function() {
         }
     });
 
+    function detailInit(e) {
+        // get a reference to the current row being initialized 
+        var detailRow = e.detailRow;
+        //alert(e.detailRow.model.id);
+        // create a subgrid for the current detail row, getting los participantes
+        
+        var urlBase = "plenarias/";
+        detailRow.find(".subgrid").kendoGrid({
+            dataSource: {
+                transport: {
+                    read: urlBase + 'getParticipantesPlenarias'
+                },
+                schema: {
+                    //data: "data"
+                    model: {
+                        id: "id",
+                        fields: {
+                            id: { editable: false, nullable: true },
+                            nombre: { validation: { required: true } },
+                            colectivo: { validation: { required: true } },
+                            tlf: {},
+                            email: {}
+                        }
+                    }
+                },
+
+                serverFiltering: true,
+                filter: { field: "id", operator: "eq", value:e.data.id }
+                //filter: { field: "EmployeeID", operator: "eq", value:e.data.EmployeeID }
+            },
+
+            columns: [
+                { field: "nombre", title: "Nombre" },
+                { field: "colectivo", title: "Colectivo" },
+                { field: "tlf", title: "Teléfono" },
+                { field: "email", title: "Email" }
+            ]
+
+        });
+    }
+
     $("#grid").kendoGrid({
         dataSource: dataSource,
         pageable: true,
@@ -80,6 +121,8 @@ $(document).ready(function() {
             { field: "observacion", title: "Observaciones", width: "100px"},
             { title: "Opciones", command: ["edit", "destroy"], title: "&nbsp;", width: "210px" }
         ],
-        editable: "inline"
+        editable: "inline",
+        detailTemplate: kendo.template($("#template").html()),
+        detailInit: detailInit
     });
 });

@@ -21,7 +21,19 @@ class Plenarias extends CI_Controller {
     public function crud($action){
         switch($action){
         case "edit":
+            callback();
             break;
+        case "create":
+            callback();
+            break;
+        case "destroy":
+            callback();
+            break;
+            
         }
+    }
+    
+    public function getParticipantesPlenarias(){
+        $plenariaId = mysql_real_escape_string($_REQUEST["filter"]["filters"][0]["value"]);
     }
 }

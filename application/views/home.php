@@ -140,6 +140,15 @@
 	  <!-- Grid de Plenarias -->
           <div id="grid" style="height: 380px" class="sapie-grid"></div>
 	  <!-- FIN Grid de Plenarias -->
+          
+          <!-- Subgrid de participantes de las plenarias -->
+          <script type="text/x-kendo-template" id="template">
+
+            <div class="subgrid"></div>
+
+          </script>
+          <!-- Fin de subgrid -->
+
         </div>
       </article>
 
@@ -152,8 +161,9 @@
     <script src="application/external/template/js/jquery.tablesorter.min.js" type="text/javascript"></script>
     <script src="application/external/template/js/jquery.equalHeight.js"     type="text/javascript"></script>
     <script src="application/external/kendoui/js/kendo.web.min.js"     type="text/javascript"></script>
+    <script src="application/external/kendoui/source/js/cultures/kendo.culture.es-VE.js" type="text/javascript"></script>
     <script src="application/external/kendoui/examples/content/shared/js/people.js"></script>
-    <script src="application/views/scripts/js/home.js"></script>
+    <script type="text/javascript"><?php include ('scripts/js/home.js') ?></script>
     <!-- FIN Carga de scripts al final para mejorar la carga del sitio -->
 
   </body>
