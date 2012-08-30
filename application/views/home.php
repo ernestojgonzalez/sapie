@@ -5,8 +5,9 @@
     <meta charset="utf-8"/>
     <title>SAPIE</title>
     <link rel="stylesheet" href="application/external/template/css/layout.css" type="text/css" media="screen" />
-    <link rel="stylesheet" href="application/external/kendoui/source/styles/kendo.common.css" type="text/css" media="screen" />
     <link rel="stylesheet" href="application/views/scripts/css/kendo.sapie.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="application/external/kendoui/source/styles/kendo.common.css" type="text/css" media="screen" />
+    
     <!--[if lt IE 9]>
 	<link rel="stylesheet" href="css/ie.css" type="text/css" media="screen" />
 	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -138,17 +139,15 @@
 	<header><h3>Plenarias</h3></header>
 	<div class="module_content">
 	  <!-- Grid de Plenarias -->
-          <div id="grid" style="height: 380px" class="sapie-grid"></div>
+          <div id="grid-plenarias" style="height: 380px" class="sapie-grid"></div>
 	  <!-- FIN Grid de Plenarias -->
-          
-          <!-- Subgrid de participantes de las plenarias -->
+
+          <!-- Subgrid Plenarias -->
           <script type="text/x-kendo-template" id="template">
-
-            <div class="subgrid"></div>
-
+            <div class="subgrid-plenarias"></div>
           </script>
-          <!-- Fin de subgrid -->
-
+          <!-- Fin Subgrid Plenarias -->
+          
         </div>
       </article>
 
@@ -162,7 +161,6 @@
     <script src="application/external/template/js/jquery.equalHeight.js"     type="text/javascript"></script>
     <script src="application/external/kendoui/js/kendo.web.min.js"     type="text/javascript"></script>
     <script src="application/external/kendoui/source/js/cultures/kendo.culture.es-VE.js" type="text/javascript"></script>
-    <script src="application/external/kendoui/examples/content/shared/js/people.js"></script>
     <script type="text/javascript"><?php include ('scripts/js/home.js') ?></script>
     <!-- FIN Carga de scripts al final para mejorar la carga del sitio -->
 

@@ -15,7 +15,8 @@ class Plenarias extends CI_Controller {
         $this->db->join('eje', 'eje.id = municipio.id_eje');        
         $query = $this->db->get();
         $data = $query->result_array();
-        echo json_encode($data);
+        header("Content-type: application/json");
+        echo "{\"data\":" .json_encode($data). "}";
     }
 
     public function crud($action){
@@ -33,7 +34,10 @@ class Plenarias extends CI_Controller {
         }
     }
     
-    public function getParticipantesPlenarias(){
-        $plenariaId = mysql_real_escape_string($_REQUEST["filter"]["filters"][0]["value"]);
+    public function getParticipantesPlenarias($plenariaId){
+        $query = $this->db->get_where('plenarias_participantes', array('plenaria' => $plenariaId));
+        $data = $query->result_array();
+        header("Content-type: application/json");
+        echo "{\"data\":" .json_encode($data). "}";
     }
 }

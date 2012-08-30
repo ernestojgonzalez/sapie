@@ -18,111 +18,51 @@ $(document).ready(function() {
     
     $('.column').equalHeight();
 
-    //Grid de Plenarias
-    var crudPlenariasBaseUrl = "plenarias/";
-    dataSource = new kendo.data.DataSource({
-        transport: {
-            read:  {
-                url: crudPlenariasBaseUrl + "getDataForGrid",
-                dataType: "json"
+    $("#grid-plenarias").kendoGrid({
+        dataSource: {
+            transport: {
+                read: "plenarias/getDataForGrid"
             },
-            update: {
-                url: crudPlenariasBaseUrl + "crud/edit",
-                dataType: "json"
-            },
-            destroy: {
-                url: crudPlenariasBaseUrl + "crud/destroy",
-                dataType: "json"
-            },
-            create: {
-                url: crudPlenariasBaseUrl + "crud/create",
-                dataType: "json"
-            },
-            parameterMap: function(options, operation) {
-                if (operation !== "read" && options.models) {
-                    return {models: kendo.stringify(options.models)};
-                }
-                //alert(kendo.stringify(options.models));
+            schema: {
+                data: "data"
             }
         },
-        batch: true,
-        pageSize: 10,
-        schema: {
-            model: {
-                id: "id",
-                fields: {
-                    id: { editable: false, nullable: true },
-                    eje: { validation: { required: true } },
-                    municipio: { validation: { required: true } },
-                    parroquia: { validation: { required: true } },
-                    lugar: { validation: { required: true } },
-                    fecha: { validation: { required: true } },
-                    observacion: {}
-                }
-            }
-        }
+        columns: [
+            { field: "eje" }, 
+            { field: "municipio" },
+            { field: "parroquia" },
+            { field: "lugar" },
+            { field: "fecha" },
+            { field: "observacion" }
+        ],
+        detailTemplate: kendo.template($("#template").html()),
+        detailInit: detailInit
     });
+
+    
 
     function detailInit(e) {
         // get a reference to the current row being initialized 
         var detailRow = e.detailRow;
-        //alert(e.detailRow.model.id);
-        // create a subgrid for the current detail row, getting los participantes
         
-        var urlBase = "plenarias/";
-        detailRow.find(".subgrid").kendoGrid({
+        // create a subgrid for the current detail row, getting territory data for this employee
+        
+        detailRow.find(".subgrid-plenarias").kendoGrid({
             dataSource: {
                 transport: {
-                    read: urlBase + 'getParticipantesPlenarias'
+                    read: "plenarias/getParticipantesPlenarias/" + e.data.id
                 },
                 schema: {
-                    //data: "data"
-                    model: {
-                        id: "id",
-                        fields: {
-                            id: { editable: false, nullable: true },
-                            nombre: { validation: { required: true } },
-                            colectivo: { validation: { required: true } },
-                            tlf: {},
-                            email: {}
-                        }
-                    }
-                },
-
-                serverFiltering: true,
-                filter: { field: "id", operator: "eq", value:e.data.id }
-                //filter: { field: "EmployeeID", operator: "eq", value:e.data.EmployeeID }
+                    data: "data"
+                }
             },
 
-            columns: [
-                { field: "nombre", title: "Nombre" },
-                { field: "colectivo", title: "Colectivo" },
-                { field: "tlf", title: "Teléfono" },
-                { field: "email", title: "Email" }
-            ]
+            columns: [{ title: "Nombre", field: "nombre" }],
 
         });
+        
     }
 
-    $("#grid").kendoGrid({
-        dataSource: dataSource,
-        pageable: true,
 
-        height: 400,
-        toolbar: [
-            { name: "create", text: "Agregar nueva plenaria" }
-        ],
-        columns: [
-            { field: "eje", title: "Eje", width: "100px" },
-            { field: "municipio", title:"Municipio", width: "100px" },
-            { field: "parroquia", width: "100px" },
-            { field: "lugar", title: "Lugar", width: "100px"},
-            { field: "fecha", title: "Fecha", width: "100px"},
-            { field: "observacion", title: "Observaciones", width: "100px"},
-            { title: "Opciones", command: ["edit", "destroy"], title: "&nbsp;", width: "210px" }
-        ],
-        editable: "inline",
-        detailTemplate: kendo.template($("#template").html()),
-        detailInit: detailInit
-    });
+
 });
