@@ -139,9 +139,15 @@
 	<header><h3>Plenarias</h3></header>
 	<div class="module_content">
 	  <!-- Grid de Plenarias -->
-          <div id="grid-plenarias" style="height: 380px" class="sapie-grid"></div>
-	  <!-- FIN Grid de Plenarias -->
-
+          <div>
+            <div style="margin-bottom: 10px;">
+              <input id="territory_#= data.id #" class="comboBox" />
+              <button class="k-button add-eje" data-plenaria-id="#= data.id #" onclick="addEje(this)" >Agregar</button>
+            </div>
+          
+            <div id="grid-plenarias" style="height: 380px" class="sapie-grid"></div>
+	    <!-- FIN Grid de Plenarias -->
+          </div> 
           <!-- Subgrid Plenarias -->
           <script type="text/x-kendo-template" id="template">
             <div class="subgrid-plenarias"></div>

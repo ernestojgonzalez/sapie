@@ -21,22 +21,49 @@ $(document).ready(function() {
     $("#grid-plenarias").kendoGrid({
         dataSource: {
             transport: {
-                read: "plenarias/getDataForGrid"
+                read: "plenarias/getDataForGrid",
+                create: {
+                    url: "plenarias/crud/create",
+                    type: "POST"
+                },
+                update: {
+                    url: "plenarias/crud/edit",
+                    type: "POST"
+                }
+            },
+            error: function(e) {
+                alert(e.responseText);
             },
             schema: {
-                data: "data"
+                data: "data",
+                model: {
+                    id: "id",
+                    fields: {
+                        eje: { validation: { required: true} },
+                        municipio: { validation: { required: true} },
+                        parroquia: { validation: { required: true} },
+                        lugar: { validation: { required: true} },
+                        fecha: { validation: { required: true} },
+                        observacion: { }
+                    }
+                }
             }
         },
         columns: [
-            { field: "eje" }, 
-            { field: "municipio" },
-            { field: "parroquia" },
-            { field: "lugar" },
-            { field: "fecha" },
-            { field: "observacion" }
+            { field: "eje", title: 'Eje', editor: ejeDropDownEditor }, 
+            { field: "municipio", title: 'Municipio' },
+            { field: "parroquia", title: 'Parroquia' },
+            { field: "lugar", title: 'Lugar' },
+            { field: "fecha", title: 'Fecha', format: "{0:dd/MMMM/yyyy}" },
+            { field: "observacion", title: 'Observaciones' }
         ],
         detailTemplate: kendo.template($("#template").html()),
-        detailInit: detailInit
+        detailInit: detailInit,
+        editable: true,
+        navigable: true,  // enables keyboard navigation in the grid
+        toolbar: [ 'save', 'cancel', 'create' ],  // adds save and cancel buttons
+        selectable: true,
+        sortable: true
     });
 
     
@@ -50,19 +77,51 @@ $(document).ready(function() {
         detailRow.find(".subgrid-plenarias").kendoGrid({
             dataSource: {
                 transport: {
-                    read: "plenarias/getParticipantesPlenarias/" + e.data.id
+                    read: "participantes/getDataForGrid/" + e.data.id,
+                    create: {
+                        url: "participantes/crud/create",
+                        type: "POST"
+                    }
                 },
                 schema: {
-                    data: "data"
+                    data: "data",
+                    model: {
+                        id: 'id',
+                        fields: {
+                            nombre: { validation: { required: true} },
+                            colectivo: { },
+                            tlf: { },
+                            email: { },
+                        }
+                    }
                 }
             },
 
-            columns: [{ title: "Nombre", field: "nombre" }],
-
+            columns: [
+                { title: "Nombre", field: "nombre" },
+                { title: "Colectivo", field: "colectivo" },
+                { title: "Teléfono", field: "tlf" },
+                { title: "Email", field: "email" }
+            ],
+            toolbar: [ "save" ],  
+            selectable: true,
+            sortable: true
         });
         
     }
 
-
+    function ejeDropDownEditor(container, options) {
+        $('<input data-text-field="CategoryName" data-value-field="CategoryName" data-bind="value:' + options.field + '"/>')
+            .appendTo(container)
+            .kendoDropDownList({
+                autoBind: false,
+                dataSource: {
+                    type: "odata",
+                    transport: {
+                        read: "http://demos.kendoui.com/service/Northwind.svc/Categories"
+                    }
+                }
+            });
+    }
 
 });
